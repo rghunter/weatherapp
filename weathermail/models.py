@@ -11,6 +11,14 @@ class Location(models.Model):
     def __unicode__(self):
         return "{}, {}".format(self.city, self.state)
 
+    @classmethod
+    def from_opendata_record(cls, record):
+        '''
+        Accepts a city record from opendata. Used to bootstrap the city database
+        '''
+        f = record['fields']
+        return cls(city=f['city'], state=f['state'])
+
     class Meta:
         unique_together = ('city', 'state')  ## prevent us from accidently adding a city/state combo twice
 

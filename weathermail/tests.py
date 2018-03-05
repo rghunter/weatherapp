@@ -5,6 +5,8 @@ from django.test import TestCase
 from django.db import IntegrityError
 from django.core.exceptions import ValidationError
 
+import json
+
 
 
 from .models import Location, Subscriber
@@ -25,6 +27,38 @@ class LocationTestCase(TestCase):
         Location(city="Boston", state="MA").save()
         with self.assertRaises(IntegrityError):
             Location(city="Boston", state="MA").save()
+
+    def test_import(self):
+        sample_object = json.loads("""
+        {
+            "datasetid": "1000-largest-us-cities-by-population-with-geographic-coordinates",
+            "recordid": "29df7b4e3a881a99657fd285cd041fe204917083",
+            "fields": {
+                "city": "Los Angeles",
+                "rank": 2,
+                "state": "California",
+                "coordinates": [
+                    34.0522342,
+                    -118.2436849
+                ],
+                "growth_from_2000_to_2013": 4.8,
+                "population": 3884307
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    -118.2436849,
+                    34.0522342
+                ]
+            },
+            "record_timestamp": "2017-06-01T14:40:33+00:00"
+        }
+        """)
+        location = Location.from_opendata_record(sample_object)
+
+        self.assertEqual(location.city, "Los Angeles")
+        self.assertEqual(location.state, "California")
+
 
 
 class SubsriberTestCase(TestCase):
