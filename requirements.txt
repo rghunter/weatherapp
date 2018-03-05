@@ -1,2 +1,4 @@
 django==1.11.10
 django-bootstrap3==9.1.0
+requests==2.18.4
+requests-mock==1.4.0
