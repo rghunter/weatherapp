@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from . import views
+from .views import SubscriberSignUp, success
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^success/$', success, name='success'),
+    url(r'^$', SubscriberSignUp.as_view(), name='subscribe')
 ]
