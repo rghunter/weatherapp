@@ -8,6 +8,7 @@ class Command(BaseCommand):
     help = "Bootstraps the location database from opendatasoft.com"
 
     QUERY = "https://public.opendatasoft.com/api/records/1.0/search/?dataset=1000-largest-us-cities-by-population-with-geographic-coordinates&rows=100&sort=-rank"
+    ## The above query pulls the top 100 most populated US cities from opendatasoft database
 
     def handle(self, *args, **options):
         ## Running this command will delete all existing subscriber records.

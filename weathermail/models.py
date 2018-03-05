@@ -26,3 +26,6 @@ class Location(models.Model):
 class Subscriber(models.Model):
     email_address = models.EmailField(unique=True)  # eforce requirement that email cannot be registered multiple times
     location = models.ForeignKey(Location)
+
+    def __unicode__(self):
+        return str(self.email_address)
