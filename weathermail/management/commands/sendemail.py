@@ -63,11 +63,13 @@ class Command(BaseCommand):
             print "Email: {}, Weather: {}".format(subscriber, weather_status.name)
 
             send_weathermail(
-                    weather_status,
-                    weather['temperature'], 
-                    weather['condition'], 
-                    weather['condition_icon'], 
-                    subscriber.location.city, 
-                    subscriber.location.state, 
-                    subscriber.email_address)
+                    weather_status=weather_status,
+                    temperature = weather['current_observation']['temp_f'],
+                    condition = weather['current_observation']['weather'],
+                    condition_icon = weather['current_observation']['icon_url'],
+                    city=subscriber.location.city,
+                    state=subscriber.location.state,
+                    customer_email=subscriber.email_address
+                    )
+
 
