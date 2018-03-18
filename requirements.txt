@@ -4,3 +4,4 @@ requests==2.18.4
 requests-mock==1.4.0
 mock==2.0.0
 enum34==1.1.6
+django-templated-email==2.2.0

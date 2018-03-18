@@ -1,18 +1,4 @@
-{% block subject %}My subject for {{username}}{% endblock %}
-{% block plain %}
-Current weather for {{city}}, {{state}}: {{ temperature }} F, {{ condition }}.
-
+{% block subject %}{% autoescape off %}{{ subject }}{% endautoescape %}{% endblock %}
+{% block plain %}Current weather for {{city}}, {{state}}: {{ temperature }} F, {{ condition }}.
 Weather provided by: Wunderground <https://www.wunderground.com/>
-{% endblock %}
-{% block html %}
-  <p>Hi {{full_name}},</p>
-
-  <p>You just signed up for my website, using:
-      <dl>
-        <dt>username</dt><dd>{{username}}</dd>
-        <dt>join date</dt><dd>{{signup_date}}</dd>
-      </dl>
-  </p>
-
-  <p>Thanks, you rock!</p>
 {% endblock %}

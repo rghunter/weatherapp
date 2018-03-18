@@ -1,15 +1,13 @@
 from django.core import mail
 from django.test import TestCase
 
-from weathermail.models.email import WeatherEmail, Subject
+from weathermail.models.email import send_weathermail, Subject
 
 class EmailTest(TestCase):
 
     def test_send_email(self):
-        # Send message.
-        email_client = WeatherEmail("ryan.g.hunter@gmail.com")
 
-        email_client.send(Subject.GOOD, 33, "Clear", "sdfsd", "boston", "ma", "test@example.com")
+        send_weathermail(Subject.GOOD, 33, "Clear", "sdfsd", "boston", "ma", "test@example.com")
 
 
         # Test that one message has been sent.
