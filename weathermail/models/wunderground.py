@@ -44,13 +44,6 @@ class WundergroundAPI(object):
 
         return resp.json()
 
-    def __avg_temp(self, almanac):
-        def temp(t):
-            return t['normal']['F']
-        high = float(temp(almanac['temp_high']))
-        low = float(temp(almanac['temp_low']))
-        return (high+low)/2.0
-
     def fetch_data(self, city, state):
         """ Wunderground API conditions and Almanac data
         for a given city and state, return the current weather conditions and historical temps
