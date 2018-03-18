@@ -10,7 +10,7 @@ have a python2.7 interpreters already installed on your machine. I highly recomm
 2. Run the database migrations (I assume you will be using just the sqlite backend. If you want to swap in a different db backend, [consult
 the django documentation](https://docs.djangoproject.com/en/1.11/ref/databases/#connecting-to-the-database)): `python manage.py migrate`
 3. Populate the locations database: `python manage.py loadlocations`
-4. Register for a [wunderground api account](https://www.wunderground.com/weather/api) and set the `WUNDERGROUN_API_KEY` in `/weatherapp/settings.py`
+4. Register for a [wunderground api account](https://www.wunderground.com/weather/api) and set the `WUNDERGROUND_API_KEY` in `/weatherapp/settings.py`
 5. (optional) configure your email backend. See the [django documentation regarding email backends](https://docs.djangoproject.com/en/1.11/topics/email/)
 6. Run the server `python manage.py runserver` and goto: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
