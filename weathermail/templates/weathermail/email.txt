@@ -1,0 +1,4 @@
+Current weather for {{city}}, {{state}}: {{ temperature }} F, {{ condition }}.
+
+Weather provided by: Wunderground <https://www.wunderground.com/>
+
