@@ -2,3 +2,12 @@
 {% block plain %}Current weather for {{city}}, {{state}}: {{ temperature }} F, {{ condition }}.
 Weather provided by: Wunderground <https://www.wunderground.com/>
 {% endblock %}
+{% block html %}
+  <p>The weather in <strong>{{city}}, {{state}}</strong> is {{condition}} with a temperature of {{ temperature }} F. </p>
+  <img border="0" alt="{{condition}}" src="{{condition_icon}}" width="100" height="100">
+
+  <p>Thanks!</p>
+  <p>Weather data provided by:</p>
+  <img border="0" src="https://icons.wxug.com/logos/JPG/wundergroundLogo_4c_horz.jpg" width="150">
+
+{% endblock %}
