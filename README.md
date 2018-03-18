@@ -22,5 +22,8 @@ The weathermail app is setup to use the django admin panel. To make use of this,
 Assuming you have properly configured your email backend, you can send email to subscribers by using the `sendemail` management command:
 `python manage.py sendemail`
 
+## Assumptions Made
+I had to make a number of assumptions when implementing the controller for sending emails. see: https://github.com/rghunter/weatherapp/blob/master/weathermail/tests/test_sendemail.py for more detail
+
 ## Developing
 Follow the steps in "Installing" to get a development machine up and running. Execute the unit tests by running: `python manage.py test`
