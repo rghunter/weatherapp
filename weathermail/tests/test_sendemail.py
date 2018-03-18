@@ -11,6 +11,7 @@ class SendemailTest(TestCase):
     * I VERY literally interpreted the algorithim described in the spec for selecting the subject. Idealy the subject states would be evaluated in a transposable order.
     this is not true in the exisitng implementation. For example, what happens if condition is sunny and the temperature is 5 degrees colder than average.
     In my implemnetation, this would be still "good" weather because good weather conditions get evaluated BEFORE bad weather conditions.
+    * I defined precipitation as a conditional where 'precip_today_in' > 0.
     """
 
     def run_fixture(self, subject_line, test_fixture):
