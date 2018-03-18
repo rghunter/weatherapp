@@ -77,4 +77,18 @@ class WundergroundAPI(object):
                 average_temp=self.__avg_temp(resp["almanac"])
                 )
 
+    def fetch_data_location(self, location):
+        """
+        calls fetch data but takes a Location object as an argument
+        :param location Location instance of a location model object
+        :return current temp, average temp, conditions, condition icon
+        {
+            "temperature": <temp in farenhieght>
+            "condition": <condition string>
+            "condition_icon": <condition icon>
+            "average_temp": <float mean temperature> 
+        }
+        """
+        return self.fetch_data(city=location.city, state=location.state)
+
 

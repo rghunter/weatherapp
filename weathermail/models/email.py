@@ -31,6 +31,6 @@ def send_weathermail(weather_status, temperature, condition, condition_icon, cit
                 temperature=temperature,
                 condition=condition.lower(), 
                 city=city.title(), 
-                state=state.upper(), 
+                state= state.upper() if len(state) == 2 else state.title(), 
                 condition_icon=condition_icon)
             )
