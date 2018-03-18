@@ -1,5 +1,7 @@
 from django.test import TestCase
 
+import json
+
 from weathermail.management.commands.sendemail import Command
 from weathermail.models.email import Subject
 
@@ -14,77 +16,110 @@ class SendemailTest(TestCase):
     * I defined precipitation as a conditional where 'precip_today_in' > 0.
     """
 
+    @staticmethod
+    def gen_almanac(high, low):
+        def temp_obj(temp):
+            return dict(normal=dict( F=str(temp))) 
+        return dict(temp_high=temp_obj(high), temp_low=temp_obj(low))
+
+    def test_gen_almanac(self):
+        fix = json.loads("""
+        {
+            "temp_high": {
+                "normal": {
+                    "F": "46"
+                }
+            },
+            "temp_low": {
+                "normal": {
+                    "F": "32"
+                }
+            }
+        }""")
+        self.assertEqual(fix, self.gen_almanac(46, 32))
+    
+
     def run_fixture(self, subject_line, test_fixture):
         sub = Command.get_subject(test_fixture)
         self.assertEqual(subject_line, sub)
 
+
     def test_good_weather(self):
         ## If its nice out, either sunny (or clear)
-        sunny = dict(
-                condition="Sunny",
-                temperature=10,
-                average_temp=10,
-                precipitating = False
+        sunny_fixture = dict(
+                current_observation=dict(
+                    temp_f=10.0,
+                    weather="Sunny",
+                    precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
                 )
 
-        self.run_fixture(Subject.GOOD, sunny)
+        self.run_fixture(Subject.GOOD, sunny_fixture)
+
+        clear_fixture = dict(
+                current_observation=dict(
+                    temp_f=10.0,
+                    weather="Clear",
+                    precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
+                )
         
-        clear = dict(
-                condition="Clear",
-                temperature=10,
-                average_temp=10,
-                precipitating = False
-                )
-
-        self.run_fixture(Subject.GOOD, clear)
+        self.run_fixture(Subject.GOOD, clear_fixture)
 
         ## or 5 degrees warmer than average
-
-        five_deg_warmer = dict(
-                condition="Clear",
-                temperature=15,
-                average_temp=10,
-                precipitating = False
+        warm_fixture = dict(
+                current_observation=dict(
+                    temp_f=15.0,
+                    weather="Clear",
+                    precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
                 )
 
-        self.run_fixture(Subject.GOOD, five_deg_warmer)
+
+        self.run_fixture(Subject.GOOD, warm_fixture)
 
     def test_bad_weather(self):
         ## or 5 degrees cooler than average
-
-        five_deg_cooler = dict(
-                condition="Raining",
-                temperature=5,
-                average_temp=10,
-                precipitating = False
+        cold_fixture = dict(
+                current_observation=dict(
+                    temp_f=5.0,
+                    weather="Clear",
+                    precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
                 )
 
-        self.run_fixture(Subject.BAD, five_deg_cooler)
+        self.run_fixture(Subject.BAD, cold_fixture)
 
         ## or precipitating
-
-        precipitating = dict(
-                condition="Raining",
-                temperature=10,
-                average_temp=10,
-                precipitating = True 
+        precipitating_fixture = dict(
+                current_observation=dict(
+                    temp_f=10.0,
+                    weather="Something not clear/sunny",
+                    precip_today_in="1.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
                 )
 
-        self.run_fixture(Subject.BAD, precipitating)
+        self.run_fixture(Subject.BAD, precipitating_fixture)
 
 
     def test_neutral_weather(self):
 
         ## All other conditions are neutral
-
-        neutral = dict(
-                condition="Raining",
-                temperature=10,
-                average_temp=10,
-                precipitating = False 
+        neutral_fixture = dict(
+                current_observation=dict(
+                    temp_f=10.0,
+                    weather="Something not clear/sunny",
+                    precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
+                    ),
+                almanac=self.gen_almanac(10, 10)
                 )
 
-        self.run_fixture(Subject.NEUTRAL, neutral)
+        self.run_fixture(Subject.NEUTRAL, neutral_fixture)
 
 
 
