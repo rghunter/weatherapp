@@ -49,8 +49,7 @@ class Command(BaseCommand):
             print "Email: {}, Weather: {}".format(subscriber, weather_status.name)
 
             send_weathermail(
-                    # weather_status,
-                    Subject.GOOD,
+                    weather_status,
                     weather['temperature'], 
                     weather['condition'], 
                     weather['condition_icon'], 

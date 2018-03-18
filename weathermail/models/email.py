@@ -1,6 +1,7 @@
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.template import Context, Template
+from django.conf import settings
 
 from templated_email import send_templated_mail
 from enum import Enum
@@ -24,7 +25,7 @@ def send_weathermail(weather_status, temperature, condition, condition_icon, cit
     """
     return send_templated_mail(
             template_name="weather",
-            from_email="ryan.g.hunter@gmail.com",
+            from_email=settings.DEFAULT_FROM_EMAIL,
             recipient_list=[customer_email],
             context = dict(
                 subject=weather_status.value,
