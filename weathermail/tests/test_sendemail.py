@@ -86,7 +86,7 @@ class SendemailTest(TestCase):
         cold_fixture = dict(
                 current_observation=dict(
                     temp_f=5.0,
-                    weather="Clear",
+                    weather="Something not clear/sunny",
                     precip_today_in="0.0", ## This actually how wunderground represents the data... as as string.. not a float because datatypes (or consistenscy) just dont matter to them ;)
                     ),
                 almanac=self.gen_almanac(10, 10)

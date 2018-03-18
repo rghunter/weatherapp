@@ -13,14 +13,28 @@ from weathermail.models.email import send_weathermail, Subject
 class Command(BaseCommand):
     help = "Send email to all subscribers"
 
+    @staticmethod
+    def average_temp(almanac):
+        """
+        Wunderground only gives us the average high and low. So what is the average temperature for the day?
+        I make the assumption that it is the average of the high and low
+        """
+        def temp(t):
+            return t['normal']['F']
+        high = float(temp(almanac['temp_high']))
+        low = float(temp(almanac['temp_low']))
+        return (high+low)/2.0
+
 
     @staticmethod
     def get_subject(weather):
 
-        condition = weather['condition']
-        curr_temp = weather['temperature']
-        avg_temp = weather['average_temp']
-        precipitating = weather['precipitating']
+        condition = weather['current_observation']['weather']
+        curr_temp = weather['current_observation']['temp_f']
+
+        precipitating = True if float(weather['current_observation']['precip_today_in']) > 0 else False
+
+        avg_temp = Command.average_temp(weather['almanac'])
 
         ## If its nice out, either sunny or 5 degrees warmer than average
         if condition in ["Sunny", "Clear"] or (curr_temp - avg_temp) >= 5.0:
