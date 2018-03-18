@@ -64,17 +64,19 @@ class WundergroundAPI(object):
             "temperature": <temp in farenhieght>
             "condition": <condition string>
             "condition_icon": <condition icon>
-            "average_temp": <float mean temperature> 
+            "average_temp": <float mean temperature>
+            "precipitating": <bool> ## true if precip in inches > 0
         }
         """
         resp = self.api_call_datafeature(["almanac","conditions"], city, state)
         conditions = resp['current_observation']
 
         return dict(
-                temperature=conditions['temp_f'],
-                condition=str(conditions['weather']),
-                condition_icon=str(conditions['icon_url']),
-                average_temp=self.__avg_temp(resp["almanac"])
+                temperature = conditions['temp_f'],
+                condition = str(conditions['weather']),
+                condition_icon = str(conditions['icon_url']),
+                average_temp = self.__avg_temp(resp["almanac"]),
+                precipitating = True if float(conditions['precip_1hr_in']) > 0.0 else False
                 )
 
     def fetch_data_location(self, location):
@@ -87,6 +89,7 @@ class WundergroundAPI(object):
             "condition": <condition string>
             "condition_icon": <condition icon>
             "average_temp": <float mean temperature> 
+            "precipitating": <bool> ## true if precip in inches > 0
         }
         """
         return self.fetch_data(city=location.city, state=location.state)

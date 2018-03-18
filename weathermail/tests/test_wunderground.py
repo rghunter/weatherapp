@@ -281,4 +281,9 @@ class WundergroundAPITestCase(TestCase):
     def test_fetch_data(self, m):
         m.return_value = self.fetch_data_response
         resp = self.api_client.fetch_data("boston", "ma")
-        self.assertEqual(resp, dict(temperature=25.2, condition="Clear", condition_icon="http://icons.wxug.com/i/c/k/nt_clear.gif", average_temp=38.5))
+        self.assertEqual(resp, dict(
+            temperature=25.2, 
+            condition="Clear", 
+            condition_icon="http://icons.wxug.com/i/c/k/nt_clear.gif", 
+            average_temp=38.5,
+            precipitating=False))
