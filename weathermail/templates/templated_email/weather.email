@@ -3,7 +3,7 @@
 Weather provided by: Wunderground <https://www.wunderground.com/>
 {% endblock %}
 {% block html %}
-  <p>The weather in <strong>{{city}}, {{state}}</strong> is {{condition}} with a temperature of {{ temperature }} F. </p>
+  <p>The weather in <strong>{{city}}, {{state}}</strong> is <strong>{{condition}}</strong> with a temperature of <strong>{{ temperature }} &#8457;</strong>. </p>
   <img border="0" alt="{{condition}}" src="{{condition_icon}}" width="100" height="100">
 
   <p>Thanks!</p>
