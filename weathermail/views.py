@@ -1,4 +1,4 @@
-from .models import Subscriber 
+from .models.db import Subscriber 
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from django.shortcuts import render

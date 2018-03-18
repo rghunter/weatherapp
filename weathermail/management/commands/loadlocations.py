@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand, CommandError
-from weathermail.models import Location, Subscriber
+from weathermail.models.db import Location, Subscriber
 import sys
 
 import requests
