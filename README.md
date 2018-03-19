@@ -23,7 +23,11 @@ Assuming you have properly configured your email backend, you can send email to 
 `python manage.py sendemail`
 
 ## Assumptions Made
-I had to make a number of assumptions when implementing the controller for sending emails. see: https://github.com/rghunter/weatherapp/blob/master/weathermail/tests/test_sendemail.py for more detail
+I had to make a number of assumptions when implementing the controller for sending emails. see: 
+* https://github.com/rghunter/weatherapp/blob/master/weathermail/tests/test_sendemail.py 
+* https://github.com/rghunter/weatherapp/blob/master/weathermail/management/commands/sendemail.py#L19
+for more detail. 
+
 In a perfect world, I would prefer to actually talk these corner cases through with whoever wrote the specification; however, I elected to make a call on my own
 and document the assumptions I made rather than drag the project out another weekend. 
 
