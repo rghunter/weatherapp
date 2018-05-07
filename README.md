@@ -1,7 +1,18 @@
 # WeatherApp
 
 ## Description
-Implementation of Klavio's https://www.klaviyo.com/weather-app sample project
+Here is a sample service that needs to be deployed! You should have recieved a set of credentials that will give you access to an AWS account you can deploy to.
+
+Weather app is a simple service that allows users to signup with an email and location. This email/locatoin is then used to generate personalized emails based on the current weather conditions.
+
+Your mission is to deploy this application using cloudformation. The application will need a database backend (RDS postgres is perfectly acceptable). You should setup the servers to run in an autoscaling group exposed publicly via an ELB.
+
+## Deploying
+
+Django has a checklist worth looking at when trying to deploy: https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
+For the purposes of this excesise, using the built in HTTP server (using manage.py runserver as described in the installing section) is aceptatble when running the application.
+
+
 
 ## Installing
 Weatherapp is written using python (django). To get up and running, first you need to install the python dependencies. I assume you
@@ -21,15 +32,6 @@ The weathermail app is setup to use the django admin panel. To make use of this,
 ## Sending Emails
 Assuming you have properly configured your email backend, you can send email to subscribers by using the `sendemail` management command:
 `python manage.py sendemail`
-
-## Assumptions Made
-I had to make a number of assumptions when implementing the controller for sending emails. see: 
-* https://github.com/rghunter/weatherapp/blob/master/weathermail/tests/test_sendemail.py 
-* https://github.com/rghunter/weatherapp/blob/master/weathermail/management/commands/sendemail.py#L19
-for more detail. 
-
-In a perfect world, I would prefer to actually talk these corner cases through with whoever wrote the specification; however, I elected to make a call on my own
-and document the assumptions I made rather than drag the project out another weekend. 
 
 ## Developing
 Follow the steps in "Installing" to get a development machine up and running. Execute the unit tests by running: `python manage.py test`
