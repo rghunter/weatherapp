@@ -7,11 +7,11 @@ Weather app is a simple service that allows users to signup with an email and lo
 
 Your mission is to deploy this application using cloudformation. The application will need a database backend (RDS postgres is perfectly acceptable). You should setup the servers to run in an autoscaling group exposed publicly via an ELB.
 
-We want to understand how you work! Please email sre@gotruemotion.com if you have any questions or need clarification.
+We want to understand how you work! Please email ryan@gotruemotion.com if you have any questions or need clarification.
 
 We are after your best work, there is not time limit placed on the assignment.
 
-When you are done, contact sre@gotruemotion.com and a member of the SRE team will reach out to you and schedule a walkthrough of your solution.
+When you are done, contact ryan@gotruemotion.com and a member of the SRE team will reach out to you and schedule a walkthrough of your solution.
 
 Good luck!
 
